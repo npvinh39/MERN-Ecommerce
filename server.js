@@ -22,6 +22,10 @@ app.use('/api', require('./routes/upload'))
 app.use('/api', require('./routes/productRouter'))
 app.use('/api', require('./routes/paymentRouter'))
 
+const Payment = require('./models/paymentModel')
+const Category = require('./models/categoryModel');
+const Product = require('./models/productModel');
+const User = require('./models/userModel');
 
 
 // Connect to mongodb
@@ -45,7 +49,21 @@ if(process.env.NODE_ENV === 'production'){
 
 
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
+
+app.use("/export",async(req,res)=>{
+    const category = await Category.find();
+    const product = await Product.find();
+    const user = await User.find();
+    const payment = await Payment.find();
+    res.json({
+        category:category,
+        product:product,
+        user:user,
+        payment:payment
+    });
+})
+
 app.listen(PORT, () =>{
     console.log('Server is running on port', PORT)
 })

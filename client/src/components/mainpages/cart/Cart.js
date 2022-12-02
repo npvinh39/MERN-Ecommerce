@@ -53,7 +53,7 @@ function Cart() {
     }
 
     const removeProduct = id =>{
-        if(window.confirm("Do you want to delete this product?")){
+        if(window.confirm("Bạn có muốn xóa sản phẩm này?")){
             cart.forEach((item, index) => {
                 if(item._id === id){
                     cart.splice(index, 1)
@@ -75,7 +75,7 @@ function Cart() {
 
         setCart([])
         addToCart([])
-        alert("You have successfully placed an order.")
+        alert("Bạn đã đặt hàng thành công.")
     }
 
 
@@ -91,10 +91,12 @@ function Cart() {
 
                         <div className="box-detail">
                             <h2>{product.title}</h2>
+                            <br />
 
-                            <h3>$ {product.price * product.quantity}</h3>
-                            <p>{product.description}</p>
-                            <p>{product.content}</p>
+                            <h3 className='text-rose-600'>$ {product.price * product.quantity}</h3>
+                            <br />
+                            {/* <p>{product.description}</p>
+                            <p>{product.content}</p> */}
 
                             <div className="amount">
                                 <button onClick={() => decrement(product._id)}> - </button>
@@ -112,7 +114,7 @@ function Cart() {
             }
 
             <div className="total">
-                <h3>Total: $ {total}</h3>
+                <h3>Tổng Tiền: $ {total}</h3>
                 <PaypalButton
                 total={total}
                 tranSuccess={tranSuccess}
